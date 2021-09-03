@@ -1,6 +1,6 @@
-const { StringDecoder } = require('string_decoder')
+import { StringDecoder } from 'string_decoder'
 
-module.exports = source => (async function * () {
+export const parse = async function * (source) {
   const matcher = /\r?\n/
   const decoder = new StringDecoder('utf8')
   let buffer = ''
@@ -12,4 +12,4 @@ module.exports = source => (async function * () {
   }
   buffer += decoder.end()
   if (buffer) yield JSON.parse(buffer)
-})()
+}

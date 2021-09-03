@@ -1,7 +1,5 @@
 # iterable-ndjson
 
-[![Build Status](https://travis-ci.org/alanshaw/iterable-ndjson.svg?branch=master)](https://travis-ci.org/alanshaw/iterable-ndjson)
-[![dependencies Status](https://david-dm.org/alanshaw/iterable-ndjson/status.svg)](https://david-dm.org/alanshaw/iterable-ndjson)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 > Takes an (async) iterable that yields ndjson and returns an async iterable that yields JS objects
@@ -15,7 +13,7 @@ npm install iterable-ndjson
 ## Usage
 
 ```js
-const ndjson = require('iterable-ndjson')
+import { ndjson } from 'iterable-ndjson'
 const it = ndjson.parse(source) // where `source` is any iterable that yields ndjson
 // Note: `parse` is the default export, so you can also use it like `ndjson(source)`
 
@@ -28,8 +26,8 @@ for await (const obj of it)
 Node.js streams are async iterable:
 
 ```js
-const ndjson = require('iterable-ndjson')
-const fs = require('fs')
+import { ndjson } from 'iterable-ndjson'
+import fs from 'fs'
 const source = fs.createReadStream('/path/to/file.ndjson')
 
 for await (const obj of ndjson.parse(source))
@@ -39,7 +37,7 @@ for await (const obj of ndjson.parse(source))
 Async iterable:
 
 ```js
-const ndjson = require('iterable-ndjson')
+import { ndjson } from 'iterable-ndjson'
 
 // An ndjson async iterator
 const source = (() => {
@@ -57,7 +55,7 @@ const source = (() => {
   }
 })()
 
-async function main () {
+const main = async ()=>{
   for await (const obj of ndjson.parse(source))
     console.log(obj)
     // Logs out:
@@ -72,7 +70,7 @@ main()
 Async iterable generator:
 
 ```js
-const ndjson = require('iterable-ndjson')
+import { ndjson } from 'iterable-ndjson'
 
 // An ndjson async iterator
 const source = (async function * () {
@@ -82,7 +80,7 @@ const source = (async function * () {
   }
 })()
 
-async function main () {
+const main = async ()=>{
   for await (const obj of ndjson.parse(source))
     console.log(obj)
     // Logs out:
@@ -97,10 +95,10 @@ main()
 Regular iterable (like an array):
 
 ```js
-const ndjson = require('iterable-ndjson')
+import { ndjson } from 'iterable-ndjson'
 const source = ['{"id": 1}\n', '{"id"', ': 2}', '\n{"id": 3}\n']
 
-async function main () {
+const main = async ()=>{
   for await (const obj of ndjson.parse(source))
     console.log(obj)
     // Logs out:
@@ -115,10 +113,10 @@ main()
 Stringify JS objects to NDJSON:
 
 ```js
-const ndjson = require('iterable-ndjson')
+import { ndjson } from 'iterable-ndjson'
 const source = [{ id: 1 }, { id: 2 }, { id: 3 }]
 
-async function main () {
+const main = async ()=>{
   for await (const obj of ndjson.stringify(source))
     console.log(obj)
     // Logs out:
@@ -132,8 +130,8 @@ main()
 
 ## Contribute
 
-Feel free to dive in! [Open an issue](https://github.com/alanshaw/iterable-ndjson/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/ninkigumi/iterable-ndjson/issues/new) or submit PRs.
 
 ## License
 
-[MIT](LICENSE) © Alan Shaw
+[MIT](LICENSE) © Alan Shaw, Teruyuki Kobayashi

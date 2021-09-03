@@ -1,3 +1,7 @@
-module.exports = require('./parse.browser')
-module.exports.parse = require('./parse.browser')
-module.exports.stringify = require('./stringify')
+import {parse} from './parse.browser.js'
+import {stringify} from './stringify.js'
+
+export const ndjson = {
+  parse: parse,
+  stringify: stringify
+}

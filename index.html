@@ -1,0 +1,30 @@
+<script type="module">
+import {ndjson} from './browser.js'
+
+const source = (() => {
+  const array = ['{"id": 1}\n', '{"id"', ': 2}', '\n{"id": 3}\n']
+  return {
+    [Symbol.asyncIterator] () {
+      return this
+    },
+    async next () {
+      await new Promise(resolve => setTimeout(resolve))
+      return array.length
+        ? { done: false, value: array.shift() }
+        : { done: true }
+    }
+  }
+})()
+
+const main = async ()=>{
+  for await (const obj of ndjson.parse(source))
+    console.log(obj)
+    // Logs out:
+    // { id: 1 }
+    // { id: 2 }
+    // { id: 3 }
+}
+
+main()
+
+</script>

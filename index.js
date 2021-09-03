@@ -1,3 +1,7 @@
-module.exports = require('./parse')
-module.exports.parse = require('./parse')
-module.exports.stringify = require('./stringify')
+import {parse} from './parse.js'
+import {stringify} from './stringify.js'
+
+export const ndjson = {
+  parse: parse,
+  stringify: stringify
+}

@@ -1,6 +1,4 @@
-/* eslint-env browser */
-
-module.exports = source => (async function * () {
+export const parse = async function * (source) {
   const matcher = /\r?\n/
   const decoder = new TextDecoder('utf8')
   let buffer = ''
@@ -15,4 +13,4 @@ module.exports = source => (async function * () {
   }
   buffer += decoder.decode()
   if (buffer) yield JSON.parse(buffer)
-})()
+}
